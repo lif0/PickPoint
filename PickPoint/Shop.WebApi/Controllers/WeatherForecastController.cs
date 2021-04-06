@@ -4,13 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shop.DataLayer.Models;
+using Shop.DataLayer.Repositories.Abstracts;
 
 namespace Shop.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class WeatherForecastController : ControllerBase
     {
+        
+        private readonly IOrderRepository _orderRepository;
+        private readonly IPostamatRepository _postamatRepository;
+        
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -18,9 +24,11 @@ namespace Shop.WebApi.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,IOrderRepository orderRepository, IPostamatRepository postamatRepository)
         {
             _logger = logger;
+            _orderRepository = orderRepository;
+            _postamatRepository = postamatRepository;
         }
 
         [HttpGet]
@@ -34,6 +42,19 @@ namespace Shop.WebApi.Controllers
                     Summary = Summaries[rng.Next(Summaries.Length)]
                 })
                 .ToArray();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Order model)
+        {
+            _orderRepository.Create(model);
+            return this.Ok();
+        }
+        
+        [HttpGet]
+        public IActionResult GetAll(int id)
+        {
+            return this.Ok(_orderRepository.FindById(id));
         }
     }
 }

@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Shop.DataLayer.Models;
+using Shop.DataLayer.Repositories;
+using Shop.DataLayer.Repositories.Abstracts;
 
 namespace Shop.WebApi
 {
@@ -28,6 +31,18 @@ namespace Shop.WebApi
         {
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "PickPoint Shop WebApi", Version = "v1"}); });
+
+            services.AddSingleton<IOrderRepository>(OrderListRepository.Instance);
+            services.AddSingleton<IPostamatRepository>(prov =>
+                {
+                    var postamats = new List<Postamat>();
+                    postamats.Add(new Postamat() {Id = Guid.NewGuid().ToString(), Address = "Степана Разина 13", IsActive = true});
+                    postamats.Add(new Postamat() {Id = Guid.NewGuid().ToString(), Address = "Петра Первого 43, 2й этаж", IsActive = true});
+                    postamats.Add(new Postamat() {Id = Guid.NewGuid().ToString(), Address = "Ленина 1"});
+
+                    return new PostamatListRepository(postamats);
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

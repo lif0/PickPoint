@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.WebApi", "Shop.WebApi\Shop.WebApi.csproj", "{6E1A4A9F-322E-425A-A63C-72B912818B44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.DataLayer", "Shop.DataLayer\Shop.DataLayer.csproj", "{7CD5E648-3D93-4969-9858-DEDC334B97FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6E1A4A9F-322E-425A-A63C-72B912818B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E1A4A9F-322E-425A-A63C-72B912818B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E1A4A9F-322E-425A-A63C-72B912818B44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD5E648-3D93-4969-9858-DEDC334B97FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD5E648-3D93-4969-9858-DEDC334B97FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD5E648-3D93-4969-9858-DEDC334B97FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD5E648-3D93-4969-9858-DEDC334B97FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
