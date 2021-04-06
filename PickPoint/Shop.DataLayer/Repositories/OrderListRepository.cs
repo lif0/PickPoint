@@ -47,5 +47,9 @@ namespace Shop.DataLayer.Repositories
         public Order FindById(int id) => _orders.SingleOrDefault(o => o.Id == id);
         
         public Order GetById(int id) => _orders.Single(o => o.Id == id);
+        
+        #if DEBUG
+        public Order[] GetAll() => _orders.ToArray();
+        #endif
     }
 }

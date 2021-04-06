@@ -9,5 +9,9 @@ namespace Shop.DataLayer.Repositories.Abstracts
         Order Update(Order order);
         
         Order FindById(int id);
+        
+        #if DEBUG
+        public Order[] GetAll();
+        #endif
     }
 }

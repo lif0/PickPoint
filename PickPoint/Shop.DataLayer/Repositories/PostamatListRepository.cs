@@ -15,9 +15,17 @@ namespace Shop.DataLayer.Repositories
         {
             this._postamats = new ReadOnlyCollection<Postamat>(postamats);
         }
+
+        public PostamatResult IsExistActive(string postamatId)
+        {
+            var p = _postamats.FirstOrDefault(p => p.Id == postamatId);
+            return p == null ? PostamatResult.NotExists : (p.IsActive ? PostamatResult.Active : PostamatResult.NotActive);
+        }
         
-        public bool IsExistActive(string modelPostamatId) => 
-            _postamats.Any(p => p.Id == modelPostamatId && p.IsActive);
+        public Postamat FindById(string postamatId) => _postamats.FirstOrDefault(p => p.Id == postamatId);
         
+        #if DEBUG
+        public Postamat[] GetAll() => _postamats.ToArray();
+        #endif
     }
 }

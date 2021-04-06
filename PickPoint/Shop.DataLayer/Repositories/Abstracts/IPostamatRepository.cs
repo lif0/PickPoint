@@ -1,7 +1,15 @@
-﻿namespace Shop.DataLayer.Repositories.Abstracts
+﻿using Shop.DataLayer.Models;
+
+namespace Shop.DataLayer.Repositories.Abstracts
 {
     public interface IPostamatRepository
     {
-        bool IsExistActive(string modelPostamatId);
+        PostamatResult IsExistActive(string postamatId);
+        
+        Postamat FindById(string postamatId);
+        
+        #if DEBUG
+        public Postamat[] GetAll();
+        #endif
     }
 }

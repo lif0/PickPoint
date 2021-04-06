@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using Shop.DataLayer.Models;
 using Shop.DataLayer.Repositories;
 using Shop.DataLayer.Repositories.Abstracts;
+using Shop.WebApi.Mapping;
 
 namespace Shop.WebApi
 {
@@ -31,14 +32,17 @@ namespace Shop.WebApi
         {
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "PickPoint Shop WebApi", Version = "v1"}); });
+            
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddSingleton<IOrderRepository>(OrderListRepository.Instance);
             services.AddSingleton<IPostamatRepository>(prov =>
                 {
                     var postamats = new List<Postamat>();
-                    postamats.Add(new Postamat() {Id = Guid.NewGuid().ToString(), Address = "Степана Разина 13", IsActive = true});
-                    postamats.Add(new Postamat() {Id = Guid.NewGuid().ToString(), Address = "Петра Первого 43, 2й этаж", IsActive = true});
-                    postamats.Add(new Postamat() {Id = Guid.NewGuid().ToString(), Address = "Ленина 1"});
+                    postamats.Add(new Postamat() {Id = "mhkpostomat1", Address = "Дагестан, Махачкала, Коркмасова ул., д. 14", IsActive = true});
+                    postamats.Add(new Postamat() {Id = "mhkpostomat2", Address = "Дагестан, Махачкала, Умаханова ул., д. 25А", IsActive = true});
+                    postamats.Add(new Postamat() {Id = "mhkpostomat3", Address = "Дагестан, Махачкала, Степана Разина ул., д. 13", IsActive = true});
+                    postamats.Add(new Postamat() {Id = "mhkpostomat4", Address = "Дагестан, Махачкала, Ленина ул., д. 1"});
 
                     return new PostamatListRepository(postamats);
                 }
